@@ -23,6 +23,28 @@ powercurve(69,73,100)
 type1error(100,69,0.6)
 1-type1error(100,73,0.8)
 
+###choose n and minimum m for n
+check_alpha_nm <- function(n,p,alpha){
+  for (m in 1:n){
+    if(type1error(n,m,p) < alpha){
+      result <- c(n,m)
+      return (result)
+    }
+     m <- m+1 
+  }
+}
+check_beta_nm <- function(n,p,beta){
+  for (m in 1:n){
+    if(1-type1error(n,m,p) > beta){
+      result <- c(n,m)
+      return (result)
+    }
+    m <- m+1 
+  }
+}
+check_alpha_nm(100,0.6,0.05)
+check_beta_nm(100,0.8,0.95)
+
 ####### use pwr package to validate ######
 library(pwr)
 
